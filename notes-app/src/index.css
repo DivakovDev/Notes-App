@@ -52,6 +52,19 @@ button:focus {
   width: 30px;
 }
 
+.delete-note{
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  color: #4a4e74;
+  border-radius: 3px;
+  height: 30px;
+  width: 30px;
+  margin-right: 15px;
+}
+
+
+
 .first-note {
   cursor: pointer;
   background-color: #4a4e74;
