@@ -52,19 +52,6 @@ button:focus {
   width: 30px;
 }
 
-.delete-note{
-  cursor: pointer;
-  background-color: white;
-  border: none;
-  color: #4a4e74;
-  border-radius: 3px;
-  height: 30px;
-  width: 30px;
-  margin-right: 15px;
-}
-
-
-
 .first-note {
   cursor: pointer;
   background-color: #4a4e74;
@@ -72,6 +59,17 @@ button:focus {
   color: white;
   border-radius: 3px;
   padding: 1rem;
+}
+
+.delete-note-button{
+  cursor: pointer;
+  background-color: #4a4e74;
+  border: none;
+  color: white;
+  border-radius: 3px;
+  height: 30px;
+  width: 30px;
+  margin-right: 15px;
 }
 
 .editor {
@@ -121,6 +119,10 @@ button:focus {
 .selected-note .text-snippet {
   color: white;
   font-weight: 700;
+}
+.selected-note .delete-note-button{
+  background-color: white;
+  color: #4a4e74;
 }
 
 .gutter {
