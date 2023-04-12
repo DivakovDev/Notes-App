@@ -35,7 +35,7 @@ button:focus {
 .sidebar--header {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: center; 
 }
 
 .sidebar--header > h3 {
@@ -61,7 +61,7 @@ button:focus {
     padding: 1rem;
 }
 
-.delete-note-button{
+.delete-notes-button{
   cursor: pointer;
   background-color: #4a4e74;
   border: none;
@@ -120,7 +120,7 @@ button:focus {
     color: white;
     font-weight: 700;
 }
-.selected-note .delete-note-button{
+.selected-note .delete-notes-button{
   background-color: white;
   color: #4a4e74;
 }
