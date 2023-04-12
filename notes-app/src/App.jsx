@@ -29,7 +29,7 @@ export default function App() {
   function updateNote(text) {
     setNotes((oldNotes) =>
       oldNotes.map((oldNote) => {
-        return oldNote.id === currentNoteId
+        return oldNote.id !== currentNoteId
           ? { ...oldNote, body: text }
           : oldNote;
       })
@@ -46,7 +46,9 @@ export default function App() {
 
   return (
     <main>
-      {notes.length > 0 ? (
+      {
+      notes.length > 0 ? 
+      (
         <Split sizes={[30, 70]} direction="horizontal" className="split">
           <Sidebar
             notes={notes}
