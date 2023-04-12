@@ -13,9 +13,9 @@ export default function App() {
     (notes[0] && notes[0].id) || ""
   );
 
-  React.useEffect (() => {
-    localStorage.setItem("notes", JSON.stringify(notes))
-  }, [notes])
+  React.useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
   function createNewNote() {
     const newNote = {
@@ -24,15 +24,6 @@ export default function App() {
     };
     setNotes((prevNotes) => [newNote, ...prevNotes]);
     setCurrentNoteId(newNote.id);
-  }
-  
-  function deleteNotes() {
-    const deleteNote = {
-      id: nanoid()
-    };
-    setNotes((prevNote) => [deleteNote, ...prevNote]);
-    setCurrentNoteId(deleteNote.id)
-    console.log('ooops')
   }
 
   function updateNote(text) {
@@ -62,7 +53,6 @@ export default function App() {
             currentNote={findCurrentNote()}
             setCurrentNoteId={setCurrentNoteId}
             newNote={createNewNote}
-            deleteNote={deleteNotes}
           />
           {currentNoteId && notes.length > 0 && (
             <Editor currentNote={findCurrentNote()} updateNote={updateNote} />
