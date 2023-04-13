@@ -1,8 +1,11 @@
 import React from "react"
 
 export default function Sidebar(props) {
+
+    
+    
     const noteElements = props.notes.map((note, index) => (
-        <div key={note.id}>
+        <div key={note.id} style={{ flexDirection: "row", display: "flex", flex: 1 }}>
             <div
                 
                 className={`title ${
@@ -11,8 +14,8 @@ export default function Sidebar(props) {
                 onClick={() => props.setCurrentNoteId(note.id)}
             >
                 <h4 className="text-snippet">Note {index + 1}</h4>
-                <button className="delete-notes-button">-</button>
             </div>
+                <button className="delete-notes-button" onClick={() => {props.deleteNotes(note.id)}}>-</button>
         </div>
     ))
 
