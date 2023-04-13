@@ -6,32 +6,42 @@ import Split from "react-split";
 import { nanoid } from "nanoid";
 
 export default function App() {
-  const [notes, setNotes] = React.useState(JSON.parse(localStorage.getItem('notes')) || []);
+  const [notes, setNotes] = React.useState(JSON.parse(localStorage.getItem("notes")) || []);
   const [currentNoteId, setCurrentNoteId] = React.useState(
     (notes[0] && notes[0].id) || ""
   );
 
   React.useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
-
+    const selectedNote = localStorage.getItem("selectedNote")
+    if(selectedNote){
+      setCurrentNoteId(selectedNote)
+    }
+  }, []);
+  function deleteNotes(noteId) {
+        // console.log(noteId);
+        const deletedNote = notes.filter(el => el.id !== noteId)
+        setNotes(deletedNote)
+        localStorage.setItem("notes", JSON.stringify(deletedNote));
+  }
+  
   function createNewNote() {
+    
     const newNote = {
       id: nanoid(),
       body: "# Type your markdown note's title here",
     };
     setNotes((prevNotes) => [newNote, ...prevNotes]);
     setCurrentNoteId(newNote.id);
+    localStorage.setItem("notes", JSON.stringify([...notes, newNote]));
   }
 
+
   function updateNote(text) {
-    setNotes((oldNotes) =>
-      oldNotes.map((oldNote) => {
-        return oldNote.id === currentNoteId
-          ? { ...oldNote, body: text }
-          : oldNote;
-      })
-    );
+    if (currentNoteId) {
+      setNotes((notes) =>
+        notes.map((note) => (note.id === currentNoteId ? { ...note, body: text } : note))
+      );
+    }
   }
 
   function findCurrentNote() {
@@ -42,6 +52,7 @@ export default function App() {
     );
   }
 
+
   return (
     <main>
       {notes.length > 0 ? (
@@ -51,6 +62,7 @@ export default function App() {
             currentNote={findCurrentNote()}
             setCurrentNoteId={setCurrentNoteId}
             newNote={createNewNote}
+            deleteNotes={deleteNotes}
           />
           {currentNoteId && notes.length > 0 && (
             <Editor currentNote={findCurrentNote()} updateNote={updateNote} />
