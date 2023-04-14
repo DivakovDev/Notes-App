@@ -17,12 +17,6 @@ export default function App() {
       setCurrentNoteId(selectedNote)
     }
   }, []);
-  function deleteNotes(noteId) {
-        // console.log(noteId);
-        const deletedNote = notes.filter(el => el.id !== noteId)
-        setNotes(deletedNote)
-        localStorage.setItem("notes", JSON.stringify(deletedNote));
-  }
   
   function createNewNote() {
     
@@ -35,6 +29,12 @@ export default function App() {
     localStorage.setItem("notes", JSON.stringify([...notes, newNote]));
   }
 
+  function deleteNotes(noteId) {
+    // console.log(noteId);
+    const deletedNote = notes.filter(el => el.id !== noteId)
+    setNotes(deletedNote)
+    localStorage.setItem("notes", JSON.stringify(deletedNote));
+}
 
   function updateNote(text) {
     if (currentNoteId) {
