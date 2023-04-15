@@ -6,20 +6,18 @@ import Split from "react-split";
 import { nanoid } from "nanoid";
 
 export default function App() {
-  const [notes, setNotes] = React.useState(JSON.parse(localStorage.getItem("notes")) || []);
+  const [notes, setNotes] = React.useState(
+    JSON.parse(localStorage.getItem("notes")) || []
+  );
   const [currentNoteId, setCurrentNoteId] = React.useState(
     (notes[0] && notes[0].id) || ""
   );
 
   React.useEffect(() => {
-    const selectedNote = localStorage.getItem("selectedNote")
-    if(selectedNote){
-      setCurrentNoteId(selectedNote)
-    }
-  }, []);
-  
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+
   function createNewNote() {
-    
     const newNote = {
       id: nanoid(),
       body: "# Type your markdown note's title here",
@@ -30,18 +28,24 @@ export default function App() {
   }
 
   function deleteNotes(noteId) {
-    // console.log(noteId);
-    const deletedNote = notes.filter(el => el.id !== noteId)
-    setNotes(deletedNote)
+    const deletedNote = notes.filter((el) => el.id !== noteId);
+    setNotes(deletedNote);
     localStorage.setItem("notes", JSON.stringify(deletedNote));
-}
+  }
 
   function updateNote(text) {
-    if (currentNoteId) {
-      setNotes((notes) =>
-        notes.map((note) => (note.id === currentNoteId ? { ...note, body: text } : note))
-      );
-    }
+    setNotes((oldNotes) => {
+      const newArr = [];
+      for (let i = 0; i < oldNotes.length; i++) {
+        const oldNote = oldNotes[i];
+        if (oldNote.id === currentNoteId) {
+          newArr.unshift({ ...oldNote, body: text });
+        } else {
+          newArr.push(oldNote);
+        }
+      }
+      return newArr;
+    });
   }
 
   function findCurrentNote() {
@@ -51,7 +55,6 @@ export default function App() {
       }) || notes[0]
     );
   }
-
 
   return (
     <main>

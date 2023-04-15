@@ -103,13 +103,14 @@ button:focus {
 
 .text-snippet {
     padding-inline: 5px;
-    font-size: 0.8rem;
-    font-weight: 400;
+    font-size: 1rem;
+    font-weight: 600;
     line-height: 1.2rem;
     color: #4A4E74;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-left: 10px;
 }
 
 .selected-note {
